@@ -1,0 +1,134 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    background: rgb(34,193,195);
+    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+
+    margin: 1px;
+
+    height: 100vh;
+    width: 100vw;
+    
+}
+.navBar{
+    height: 70px;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: larger;
+    font-weight: bolder;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(111,111,207,1) 51%, rgba(0,212,255,1) 100%);
+}
+
+.topBox{
+    padding-top: 30px;
+    height: 70vh;
+    width: 99vw;
+    /* border: 2px solid white; */
+    display: flex;
+    justify-content: space-evenly;
+}
+.leftBox{
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    height: 300px;
+    width: 600px;
+    
+    /* border: 2px solid white; */
+}
+.leftBox button{
+    margin-top: 10px;
+    height: 50px;
+    width: 100px;
+    font-size: large;
+    font-weight: 680;
+    background: rgb(34,193,195);
+    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+    border-radius: 1rem;
+}
+.rightBox button{
+    margin-top: 10px;
+    height: 50px;
+    width: 100px;
+    font-size: large;
+    font-weight: 680;
+    background: rgb(34,193,195);
+    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+    border-radius: 1rem;
+    
+}
+
+
+.rightBox{
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px; 
+    height: 300px;
+    width: 600px;
+    /* border: 2px solid white; */
+}
+img{
+    border-radius: 2rem;
+    height: 350px;
+    width: 350px;
+}
+.bottomBox{
+    display: flex;
+    justify-content:center;
+
+}
+
+#startButton{
+      margin-top: 10px;
+    height: 50px;
+    width: 100px;
+    font-size: large;
+    font-weight: 680;
+    background: rgb(34,193,195);
+    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+    border-radius: 1rem;
+}
+
+
+#player1message{
+    
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(24, 11, 56) ;
+    font-weight: 800;
+}
+
+
+#player2message{
+    
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgb(24, 11, 56) ;
+    font-weight: 800;
+}
+
+
+#p1Score{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(40, 12, 12);
+    font-weight: 900;
+}
+
+#p2Score{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(40, 12, 12);
+    font-weight: 900;
+}
