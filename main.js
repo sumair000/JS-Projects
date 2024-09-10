@@ -89,6 +89,7 @@ function winner() {
     } else {
       alert("MATCH DRAW...");
     }
+    document.getElementById('rollDice').disabled = true;
   }
 }
 
