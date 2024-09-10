@@ -90,11 +90,14 @@ img{
 .bottomBox{
     display: flex;
     justify-content:center;
+    
 
 }
 
-#startButton{
-      margin-top: 10px;
+.buttons{
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
     height: 50px;
     width: 100px;
     font-size: large;
