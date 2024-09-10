@@ -2,11 +2,13 @@ person1 = {
   id: 1,
   score: 0,
   turn: false,
+  name:"Player 1",
 };
 person2 = {
   id: 2,
   score: 0,
   turn: false,
+  name:"Player 2",
 };
 
 let playerID = null;
@@ -18,12 +20,10 @@ function start() {
   let toss = Math.random();
   if (toss <= 0.5) {
     playerID = 1;
-    person1.name = "First Person";
     document.getElementById("rollDice").addEventListener("click", RollDicee);
     document.getElementById("player1message").innerHTML = "player 1's turn";
   } else {
     playerID = 2;
-    person2.name = "Second Person";
     document.getElementById("rollDice").addEventListener("click", RollDicee);
     document.getElementById("player2message").innerHTML = "Player 2's turn";
   }
@@ -36,6 +36,9 @@ function RollDicee() {
     person1.score += roll;
     if(person2.turn === true && person2.score < person1.score){
         person1.turn = true;
+        document.getElementById(
+            "player1message"
+          ).innerHTML = `Score ${person1.score}`;
         winner()
         return;
     }
@@ -55,6 +58,9 @@ function RollDicee() {
     person2.score += roll;
     if(person1.turn === true && person2.score > person1.score){
         person2.turn = true;
+        document.getElementById(
+            "player2message"
+          ).innerHTML = `Score ${person2.score}`;
         winner()
         return;
     }
@@ -85,3 +91,6 @@ function winner() {
     }
   }
 }
+
+console.log(person1);
+console.log(person2);
