@@ -81,7 +81,7 @@ function RollDicee() {
 
 function winner() {
 
-  if (person1.turn === true && person2.turn === true) {
+  if (person1.turn && person2.turn) {
     if (person1.score > person2.score) {
       document.getElementById('p1-won').innerHTML = "PLAYER 1 WON!...😎";
     } else if (person1.score < person2.score) {
