@@ -58,8 +58,6 @@ function diceRoll(){
   if (roll === 1) {
     count += 1;
     if (count === 2) {
-
-      document.getElementById('rollDice').disabled = true;
       
       player[0].turn = true;
       player[1].turn = true;
@@ -70,8 +68,11 @@ function diceRoll(){
     }
     
     switchPlayer();
+  
+  
     
   }
+  winner();
 
   
 
@@ -89,6 +90,8 @@ function countScore(roll){
 
   currentPlayer.score += roll;
     
+  document.getElementById(`player${currentPlayer.id}message`).innerHTML = `${player[currentPlayer.id-1].score}`;
+
 }
 
 function switchPlayer(){
@@ -109,23 +112,43 @@ function winner(){
   const player1 = player[0];
   const player2 = player[1];
 
+  if ((player1.turn && player2.turn)) {
 
-    if ((player1.turn && player2.turn)) {
+    if (player1.score > player2.score) {
 
-        if (player1.score > player2.score) {
+      showResult(player1.id);
+      return;
 
-          showResult(player1.id);
+    } else if (player1.score < player2.score) {
 
-        } else if (player1.score < player2.score) {
+      showResult(player2.id);
+      return;
+    } else {
 
-          showResult(player2.id);
-        } else {
+      alert("MATCH DRAW...");
+      return;
 
-          alert("MATCH DRAW...");
-
-        }
-      
     }
+  
+}
+
+  const nextPlayer = player.find( p=> p.turn === false)
+
+  const currentPlayer = player.find( p=> p.turn === true);
+
+  if (nextPlayer.turn === false && nextPlayer.score !== 0) {
+    
+    if (currentPlayer.score > nextPlayer.score) {
+      
+      showResult(currentPlayer.id);
+
+
+      return;
+
+    }
+
+  }
+  
 
 }
 
@@ -133,6 +156,10 @@ function showResult(id){
 
   document.getElementById(`p${id}-won`).innerHTML = `Player ${id} WON...😎`;
 
+  document.getElementById('rollDice').disabled = true;
+
+
 }
+
 
 
