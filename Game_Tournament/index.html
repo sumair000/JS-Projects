@@ -8,28 +8,32 @@
 </head>
 <body>
     <div class="container">
+        
         <header>
             <div class="navBar">
                 <h2>DICE GAME</h2>
 
             </div>
         </header>
+
+        <h3 id="playermessage"></h3>
+
         <div class="topBox">
-            <div class="leftBox">
+            <div id="leftBox1">
                 <h2 id="p1-won"></h2>
                 <img id="dice-img1"  src="images/1.svg" alt="not showing">
-                <h3 id="player1message"></h3>
+                
                 
             </div>
-            <div class="rightBox">
+            <div id="leftBox2">
                 <h2 id="p2-won"></h2>
                 <img id="dice-img2"  src="images/1.svg" alt="not showing">
-                <h3 id="player2message"></h3>
                 
             </div>
         </div>
         <div class="bottomBox">
             <button id="startButton" class="buttons">Start Game</button>
+            <button id="tossButton" class="buttons">Toss</button>
             <button id="rollDice" class="buttons">Roll Dice</button>
     
         </div>

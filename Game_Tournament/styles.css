@@ -36,6 +36,7 @@
     display: flex;
     justify-content: space-evenly;
 }
+
 .leftBox{
     padding-top: 20px;
     display: flex;
@@ -108,15 +109,7 @@ img{
 }
 
 
-#player1message{
-    
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color: rgb(24, 11, 56) ;
-    font-weight: 800;
-}
-
-
-#player2message{
+#playermessage{
     
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: rgb(24, 11, 56) ;
