@@ -76,10 +76,7 @@ function startGame(){
 
 function showMessage(number){
 
-    let matchMessage = document.createElement('h3');
-    matchMessage.innerText = `Mathch No: ${number} started!...`;
-    document.querySelector('.container').appendChild(matchMessage);
-
+    alert(`Mathch No: ${number} started!...`)
 }
 
 let playMatch = player.filter(pair => {
@@ -178,6 +175,8 @@ function countScore(roll){
   
     currentPlayer.score += roll;
 
+    document.getElementById(`score-area${currentPlayer.id}`).innerHTML = `score: ${currentPlayer.score}`;
+
     console.log('score--->',currentPlayer.score);
     
 
@@ -194,6 +193,7 @@ function switchPlayer(){
 
     console.log('next player id',nextPlayer.id-1);
     
+    document.getElementById('playermessage').innerHTML = "";
     turnMessage(nextPlayer.id-1);
    
 }
@@ -246,9 +246,13 @@ function winner(){
   
   function showResult(id){
   
-    document.getElementById(`p${id}-won`).innerHTML = `Player ${id} WON...😎`;
+    document.getElementById(`p-won`).innerHTML = `Player ${id} WON...😎`;
   
     document.getElementById('rollDice').disabled = true;
   
   
   }
+
+  
+
+  
