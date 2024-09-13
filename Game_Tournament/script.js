@@ -58,6 +58,8 @@ const player = [
   },
 ];
 
+let quaterPlayers = [];
+
 let first = 1;
 let second = 5;
 
@@ -83,7 +85,7 @@ function startGame() {
   updateIds(first,second);
   first +=1;
   second +=1;
-    console.log(first,second);
+    // console.log(first,second);
     
 }
 
@@ -131,9 +133,9 @@ function toss() {
 
 function turnMessage(id) {
 
-  console.log("array idex", id);
+//   console.log("array idex", id);
 
-  console.log("--------------------------->");
+//   console.log("--------------------------->");
 
   const message = document.createElement("h3");
 
@@ -153,7 +155,7 @@ function diceRoll() {
 
   const currentPlayer = playMatch.find((p) => p.turn === true);
 
-  console.log("dice before id", currentPlayer.id);
+//   console.log("dice before id", currentPlayer.id);
 
   changeDiceImages(roll, currentPlayer.id);
 
@@ -177,7 +179,7 @@ function diceRoll() {
 
 function changeDiceImages(roll, playerId) {
 
-  console.log("ch img id: ", playerId);
+//   console.log("ch img id: ", playerId);
 
   document.getElementById(`dice-img${playerId}`).src = `images/${roll}.svg`;
 
@@ -205,7 +207,7 @@ function switchPlayer() {
 
   currentPlayer.turn = false;
 
-  console.log("next player id", nextPlayer.id - 1);
+//   console.log("next player id", nextPlayer.id - 1);
 
   document.getElementById("playermessage").innerHTML = "";
 
@@ -220,10 +222,12 @@ function winner() {
 
   if (player1.turn && player2.turn) {
     if (player1.score > player2.score) {
-      showResult(player1.id);
+        quaterPlayers.push(player1);
+        showResult(player1.name);
       return;
     } else if (player1.score < player2.score) {
-      showResult(player2.id);
+        quaterPlayers.push(player2);
+        showResult(player2.name);
       return;
     } else {
       alert("MATCH DRAW...");
@@ -238,6 +242,7 @@ function winner() {
 
   if (nextPlayer.turn === false && nextPlayer.score !== 0) {
     if (currentPlayer.score > nextPlayer.score) {
+        quaterPlayers.push(currentPlayer);
       showResult(currentPlayer.name);
 
       return;
@@ -252,6 +257,7 @@ function showResult(id) {
 
   document.getElementById("rollDice").disabled = true;
 
+  console.log(quaterPlayers); 
 
 }
 
@@ -274,4 +280,5 @@ function reset(){
 
 
 }
+
 
