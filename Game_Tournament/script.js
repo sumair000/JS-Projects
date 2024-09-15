@@ -1,6 +1,6 @@
 
 
-const player = [
+const allPLayers = [
   {
     id: 1,
     name: "Player 1",
@@ -60,6 +60,8 @@ const player = [
 
 let quaterPlayers = [];
 
+
+
 let first = 1;
 let second = 5;
 
@@ -77,6 +79,8 @@ let matchNumber = 0;
 
 function startGame() {
 
+    console.log(allPLayers);
+    
   document.getElementById("startButton").disabled = true;
   matchNumber += 1;
   showMessage(matchNumber);
@@ -100,15 +104,17 @@ function updateIds(newId1, newId2) {
     id1 = newId1;
     id2 = newId2;
 
-    playMatch = player.filter((pair) => {
+    playMatch = allPLayers.filter((pair) => {
 
       return pair.id === id1 || pair.id === id2;
 
-    });
+    }).map(p => ({...p}));
 
     playMatch[0].id = 1;
     playMatch[1].id = 2;
     console.log(playMatch); 
+
+
 
     return playMatch;
 }
@@ -126,6 +132,9 @@ function toss() {
 
   console.log(playMatch[wonToss].name);
   // console.log(playMatch[wonToss].id);
+
+  console.log(playMatch);
+  
 
   turnMessage(wonToss);
 
@@ -181,6 +190,7 @@ function changeDiceImages(roll, playerId) {
 
 //   console.log("ch img id: ", playerId);
 
+
   document.getElementById(`dice-img${playerId}`).src = `images/${roll}.svg`;
 
 }
@@ -207,9 +217,11 @@ function switchPlayer() {
 
   currentPlayer.turn = false;
 
-//   console.log("next player id", nextPlayer.id - 1);
+//   console.log("next allPLayers id", nextPlayer.id - 1);
 
   document.getElementById("playermessage").innerHTML = "";
+  console.log(nextPlayer.name);
+
 
   turnMessage(nextPlayer.id - 1);
 
@@ -222,11 +234,19 @@ function winner() {
 
   if (player1.turn && player2.turn) {
     if (player1.score > player2.score) {
-        quaterPlayers.push(player1);
+
+        const pName = player1.name;
+        const index = allPLayers.findIndex((p) => p.name === pName)
+        quaterPlayers.push(allPLayers[index]);
+
         showResult(player1.name);
       return;
     } else if (player1.score < player2.score) {
-        quaterPlayers.push(player2);
+        
+        const pName = player2.name;
+        const index = allPLayers.findIndex((p) => p.name === pName)
+        quaterPlayers.push(allPLayers[index]);
+
         showResult(player2.name);
       return;
     } else {
@@ -242,7 +262,10 @@ function winner() {
 
   if (nextPlayer.turn === false && nextPlayer.score !== 0) {
     if (currentPlayer.score > nextPlayer.score) {
-        quaterPlayers.push(currentPlayer);
+
+        const pName = currentPlayer.name;
+        const index = allPLayers.findIndex((p) => p.name === pName)
+        quaterPlayers.push(allPLayers[index]);
       showResult(currentPlayer.name);
 
       return;
@@ -263,13 +286,17 @@ function showResult(id) {
 
 function reset(){
 
-    playMatch[0].id = 0;
-    playMatch[1].id = 0;
+    // playMatch[0].id = 0;
+    // playMatch[1].id = 0;
 
     document.getElementById("turnMessage").innerHTML = "";
     document.getElementById(`score-area1`).innerHTML = "";
     document.getElementById(`score-area2`).innerHTML = "";
     document.getElementById(`p-won`).innerHTML = "";
+    document.getElementById(`dice-img1`).src = `images/1.svg`;
+    document.getElementById(`dice-img2`).src = `images/1.svg`;
+
+
 
 
   document.getElementById("startButton").disabled = false;
@@ -280,5 +307,4 @@ function reset(){
 
 
 }
-
 
