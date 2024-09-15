@@ -172,15 +172,20 @@ function diceRoll() {
 
   if (roll === 1) {
     count += 1;
+    console.log('count ki value',count);
     if (count === 2) {
       playMatch[0].turn = true;
       playMatch[1].turn = true;
+        console.log('dono true hain');
+        
+    
+    
 
       winner();
       return;
     }
-
     switchPlayer();
+
   }
   winner();
 
@@ -221,6 +226,12 @@ function switchPlayer() {
 
   document.getElementById("playermessage").innerHTML = "";
   console.log(nextPlayer.name);
+  console.log(nextPlayer.turn);
+  console.log(currentPlayer.name);
+  console.log(currentPlayer.turn);
+
+
+
 
 
   turnMessage(nextPlayer.id - 1);
@@ -256,12 +267,18 @@ function winner() {
     }
   }
 
-  const nextPlayer = playMatch.find((p) => p.turn === false);
+  const prePlayer = playMatch.find((p) => p.turn === false);
 
   const currentPlayer = playMatch.find((p) => p.turn === true);
+  console.log(prePlayer.name);
+  console.log(prePlayer.turn);
+  console.log(currentPlayer.name);
+  console.log(currentPlayer.turn);
 
-  if (nextPlayer.turn === false && nextPlayer.score !== 0) {
-    if (currentPlayer.score > nextPlayer.score) {
+
+
+  if ((prePlayer.turn === false) && (prePlayer.score !== 0)) {
+    if (currentPlayer.score > prePlayer.score) {
 
         const pName = currentPlayer.name;
         const index = allPLayers.findIndex((p) => p.name === pName)
@@ -288,7 +305,7 @@ function reset(){
 
     // playMatch[0].id = 0;
     // playMatch[1].id = 0;
-
+    count = 0;
     document.getElementById("turnMessage").innerHTML = "";
     document.getElementById(`score-area1`).innerHTML = "";
     document.getElementById(`score-area2`).innerHTML = "";
@@ -304,7 +321,13 @@ function reset(){
   document.getElementById("tossButton").disabled = false;
 
   document.getElementById("rollDice").disabled = false;
+sortArray();
 
+}
 
+function sortArray(){
+    quaterPlayers.sort();
+    console.log(quaterPlayers);
+    
 }
 
