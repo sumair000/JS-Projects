@@ -285,9 +285,11 @@ function winner() {
       return;
     } else {
       alert("MATCH DRAW...");
-      alert("Both player have One turn")
+      alert("Both player have playe again,Score is zero,just roll the dice and play")
       player1.score = 0;
+      player1.turn = true;
       player2.score = 0;
+      player2.turn = false;
         // document.getElementById("rollDice").disabled = true;
       return;
     }
