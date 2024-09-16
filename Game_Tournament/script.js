@@ -79,16 +79,18 @@ let matchNumber = 0;
 
 function startGame() {
 
-    console.log(allPLayers);
+    // console.log(allPLayers);
     
   document.getElementById("startButton").disabled = true;
   matchNumber += 1;
   showMessage(matchNumber);
 
+  if (matchNumber <= 4) {
+        updateIds(first,second);
+        first +=1;
+        second +=1;
+  }
   
-  updateIds(first,second);
-  first +=1;
-  second +=1;
     // console.log(first,second);
     
 }
@@ -104,11 +106,23 @@ function updateIds(newId1, newId2) {
     id1 = newId1;
     id2 = newId2;
 
+    if ((id1 === 0 && id2 === 2) || (id1 === 2 && id2 === 4)) {
+        console.log('main run howa ho');
+        console.log('idssssss--->',id1,id2);
+        
+        playMatch = quaterPlayers.slice(id1,id2).map(p=> ({...p}));
+        console.log('6ht match hy',playMatch);
+        
+    }
+    else{
+        
     playMatch = allPLayers.filter((pair) => {
 
-      return pair.id === id1 || pair.id === id2;
+        return pair.id === id1 || pair.id === id2;
+  
+      }).map(p => ({...p}));
+    }
 
-    }).map(p => ({...p}));
 
     playMatch[0].id = 1;
     playMatch[1].id = 2;
@@ -225,10 +239,10 @@ function switchPlayer() {
 //   console.log("next allPLayers id", nextPlayer.id - 1);
 
   document.getElementById("playermessage").innerHTML = "";
-  console.log(nextPlayer.name);
-  console.log(nextPlayer.turn);
-  console.log(currentPlayer.name);
-  console.log(currentPlayer.turn);
+//   console.log(nextPlayer.name);
+//   console.log(nextPlayer.turn);
+//   console.log(currentPlayer.name);
+//   console.log(currentPlayer.turn);
 
 
 
@@ -270,10 +284,10 @@ function winner() {
   const prePlayer = playMatch.find((p) => p.turn === false);
 
   const currentPlayer = playMatch.find((p) => p.turn === true);
-  console.log(prePlayer.name);
-  console.log(prePlayer.turn);
-  console.log(currentPlayer.name);
-  console.log(currentPlayer.turn);
+//   console.log(prePlayer.name);
+//   console.log(prePlayer.turn);
+//   console.log(currentPlayer.name);
+//   console.log(currentPlayer.turn);
 
 
 
@@ -313,7 +327,13 @@ function reset(){
     document.getElementById(`dice-img1`).src = `images/1.svg`;
     document.getElementById(`dice-img2`).src = `images/1.svg`;
 
-
+    if (matchNumber === 6) {
+        console.log('remoe kro 4 elements');
+        quaterPlayers.splice(0,4);
+        console.log(quaterPlayers);
+        
+        
+    }
 
 
   document.getElementById("startButton").disabled = false;
@@ -321,13 +341,23 @@ function reset(){
   document.getElementById("tossButton").disabled = false;
 
   document.getElementById("rollDice").disabled = false;
-sortArray();
 
-}
-
-function sortArray(){
-    quaterPlayers.sort();
-    console.log(quaterPlayers);
+  if(matchNumber >= 4){
     
+    console.log('Quater Final ka shocho ');
+    first = 0;
+    second = 2;
+    if (matchNumber === 5) {
+        console.log('quater final 2');
+        
+    updateIds(first+2,second+2);
+
+        return;
+    }
+    updateIds(first,second);
+
+
+  }
 }
+
 
