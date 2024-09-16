@@ -97,7 +97,16 @@ function startGame() {
 
 function showMessage(number) {
 
-  alert(`Mathch No: ${number} started!...`);
+    if(number > 6){
+        alert(`FINAL MATCH IS STARTED!....`);
+    }
+    else if (number > 4) {
+        alert(` Semi Final Matche ${number - 4} started!...`);  
+    }
+    else{
+        alert(`Quater Final Match No: ${number} started!...`);
+    }
+
 
 }
 
@@ -276,7 +285,10 @@ function winner() {
       return;
     } else {
       alert("MATCH DRAW...");
-        document.getElementById("rollDice").disabled = true;
+      alert("Both player have One turn")
+      player1.score = 0;
+      player2.score = 0;
+        // document.getElementById("rollDice").disabled = true;
       return;
     }
   }
@@ -307,11 +319,23 @@ function winner() {
 
 function showResult(id) {
 
-  document.getElementById(`p-won`).innerHTML = `Player ${id} WON...😎`;
+    if (matchNumber > 6) {
+        console.log('mathc number :',matchNumber);
+        
+        document.getElementById(`navBar1`).innerHTML = `${id} WON THE FINAL MATCH 😎😎😍😍`;
+        document.getElementById("rollDice").disabled = true;
+        document.getElementById('nextMatch').disabled = true;
 
-  document.getElementById("rollDice").disabled = true;
+        
+    }
+    else{
+        document.getElementById(`p-won`).innerHTML = `${id} WON...😎`;
 
-  console.log(quaterPlayers); 
+        document.getElementById("rollDice").disabled = true;
+      
+        console.log(quaterPlayers);
+    }
+  
 
 }
 
@@ -328,10 +352,11 @@ function reset(){
     document.getElementById(`dice-img2`).src = `images/1.svg`;
 
     if (matchNumber === 6) {
+        console.log('6 matchs are completed');
+        
         console.log('remoe kro 4 elements');
         quaterPlayers.splice(0,4);
         console.log(quaterPlayers);
-        
         
     }
 

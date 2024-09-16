@@ -20,7 +20,7 @@
     height: 70px;
     width: 100vw;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     color: white;
     font-size: larger;
