@@ -223,7 +223,7 @@ function diceRoll() {
     }
     switchPlayer(currentPlayer);
   }
-  winner();
+  winner(currentPlayer);
 
 }
 
@@ -266,7 +266,7 @@ for(let i = 0; i < playMatch.length; i++){
 
 }
 
-function winner() {
+function winner(currentPlayer) {
 
   const player1 = playMatch[0];
   const player2 = playMatch[1];
@@ -327,9 +327,18 @@ function winner() {
     }
   }
 
-  const prePlayer = playMatch.find((p) => p.turn === false);
+//   const prePlayer = playMatch.find((p) => p.turn === false);
+    let prePlayer = null;
 
-  const currentPlayer = playMatch.find((p) => p.turn === true);
+    for(let i = 0; i < playMatch.length; i++){
+
+        if(!playMatch[i].turn){
+
+            prePlayer = playMatch[i];    
+        }
+    }
+
+//   const currentPlayer = playMatch.find((p) => p.turn === true);
 
   if ((prePlayer.turn === false) && (prePlayer.score !== 0)) {
 
