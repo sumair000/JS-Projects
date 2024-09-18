@@ -207,7 +207,7 @@ function diceRoll() {
 
   changeDiceImages(roll, currentPlayer.id);
 
-  countScore(roll);
+  countScore(roll, currentPlayer);
 
   if (roll === 1) {
 
@@ -221,7 +221,7 @@ function diceRoll() {
       winner();
       return;
     }
-    switchPlayer();
+    switchPlayer(currentPlayer);
   }
   winner();
 
@@ -233,9 +233,7 @@ function changeDiceImages(roll, playerId) {
 
 }
 
-function countScore(roll) {
-
-  const currentPlayer = playMatch.find((p) => p.turn === true);
+function countScore(roll, currentPlayer) {
 
   currentPlayer.score += roll;
 
@@ -243,11 +241,20 @@ function countScore(roll) {
 
 }
 
-function switchPlayer() {
+function switchPlayer(currentPlayer) {
 
-  const currentPlayer = playMatch.find((p) => p.turn === true);
+//   const nextPlayer = playMatch.find((p) => p.turn === false);
 
-  const nextPlayer = playMatch.find((p) => p.turn === false);
+let nextPlayer = null;
+
+for(let i = 0; i < playMatch.length; i++){
+
+    if(!playMatch[i].turn){
+
+        nextPlayer = playMatch[i];
+        
+    }
+}
 
   nextPlayer.turn = true;
 
@@ -270,7 +277,17 @@ function winner() {
         const pName = player1.name;
         console.log('won: ',pName);
         
-        const index = allPLayers.findIndex((p) => p.name === pName)
+        // const index = allPLayers.findIndex((p) => p.name === pName  )
+        let index = null;
+        for (let i = 0; i < allPLayers.length; i++) {
+            
+            if (allPLayers[i].name === pName) {
+                index = i;
+                break;
+            }
+        }
+        console.log('index---> ',index);
+        
         quaterPlayers.push(allPLayers[index]);
 
         showResult(player1.name);
@@ -282,7 +299,16 @@ function winner() {
         const pName = player2.name;
         console.log('won: ',pName);
         
-        const index = allPLayers.findIndex((p) => p.name === pName)
+        // const index = allPLayers.findIndex((p) => p.name === pName)
+        let index = null;
+        for (let i = 0; i < allPLayers.length; i++) {
+            
+            if (allPLayers[i].name === pName) {
+                index = i;
+                break;
+            }
+        }
+        console.log('index---> ',index);
         quaterPlayers.push(allPLayers[index]);
 
         showResult(player2.name);
@@ -313,6 +339,7 @@ function winner() {
         console.log('won: ',pName);
         
         const index = allPLayers.findIndex((p) => p.name === pName)
+        console.log('index---> ',index);
         quaterPlayers.push(allPLayers[index]);
         showResult(currentPlayer.name);
 
