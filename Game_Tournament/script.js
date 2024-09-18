@@ -185,7 +185,25 @@ function diceRoll() {
 
   let roll = Math.floor(Math.random() * 6) + 1;
 
-  const currentPlayer = playMatch.find((p) => p.turn === true);
+    console.log(playMatch);
+
+    let currentPlayer = null;
+
+    for(let i = 0; i < playMatch.length; i++){
+
+        if(playMatch[i].turn){
+
+            console.log(playMatch);
+            console.log(playMatch[i]);
+            
+            currentPlayer = playMatch[i];
+            
+        }
+    }
+    // const currentPlayer = playMatch.find((p) => p.turn === true);
+
+    console.log(playMatch);
+
 
   changeDiceImages(roll, currentPlayer.id);
 
