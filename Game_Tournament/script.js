@@ -78,8 +78,6 @@ document.getElementById('nextMatch').addEventListener('click',reset);
 let matchNumber = 0;
 
 function startGame() {
-
-    // console.log(allPLayers);
     
   document.getElementById("startButton").disabled = true;
   matchNumber += 1;
@@ -91,7 +89,6 @@ function startGame() {
         second +=1;
   }
   
-    // console.log(first,second);
     
 }
 
@@ -116,14 +113,18 @@ function updateIds(newId1, newId2) {
     id2 = newId2;
 
     if ((id1 === 0 && id2 === 2) || (id1 === 2 && id2 === 4)) {
-        console.log('main run howa ho');
-        console.log('idssssss--->',id1,id2);
         
-        playMatch = quaterPlayers.slice(id1,id2).map(p=> ({...p}));
-        console.log('6ht match hy',playMatch);
+        playMatch = [];
+        for (let i = id1; i < id2; i++) {
         
+            playMatch.push({...quaterPlayers[i]})
+        }
+        // playMatch = quaterPlayers.slice(id1,id2).map(p=> ({...p}));
+        console.log(playMatch);
+         
     }
     else{
+        
         
     playMatch = allPLayers.filter((pair) => {
 
@@ -131,13 +132,12 @@ function updateIds(newId1, newId2) {
   
       }).map(p => ({...p}));
     }
+    console.log(playMatch);
+
 
 
     playMatch[0].id = 1;
     playMatch[1].id = 2;
-    console.log(playMatch); 
-
-
 
     return playMatch;
 }
@@ -149,25 +149,13 @@ function toss() {
 
   let wonToss = Math.random() < 0.5 ? 0 : 1;
 
-  // console.log(playMatch);
-
   playMatch[wonToss].turn = true;
-
-  console.log(playMatch[wonToss].name);
-  // console.log(playMatch[wonToss].id);
-
-  console.log(playMatch);
-  
 
   turnMessage(wonToss);
 
 }
 
 function turnMessage(id) {
-
-//   console.log("array idex", id);
-
-//   console.log("--------------------------->");
 
   const message = document.createElement("h3");
 
@@ -187,37 +175,29 @@ function diceRoll() {
 
   const currentPlayer = playMatch.find((p) => p.turn === true);
 
-//   console.log("dice before id", currentPlayer.id);
-
   changeDiceImages(roll, currentPlayer.id);
 
   countScore(roll);
 
   if (roll === 1) {
+
     count += 1;
-    console.log('count ki value',count);
+
     if (count === 2) {
+
       playMatch[0].turn = true;
       playMatch[1].turn = true;
-        console.log('dono true hain');
-        
     
-    
-
       winner();
       return;
     }
     switchPlayer();
-
   }
   winner();
 
 }
 
 function changeDiceImages(roll, playerId) {
-
-//   console.log("ch img id: ", playerId);
-
 
   document.getElementById(`dice-img${playerId}`).src = `images/${roll}.svg`;
 
@@ -231,8 +211,6 @@ function countScore(roll) {
 
   document.getElementById(`score-area${currentPlayer.id}`).innerHTML = `score: ${currentPlayer.score}`;
 
-  console.log("score--->", currentPlayer.score);
-
 }
 
 function switchPlayer() {
@@ -245,17 +223,7 @@ function switchPlayer() {
 
   currentPlayer.turn = false;
 
-//   console.log("next allPLayers id", nextPlayer.id - 1);
-
   document.getElementById("playermessage").innerHTML = "";
-//   console.log(nextPlayer.name);
-//   console.log(nextPlayer.turn);
-//   console.log(currentPlayer.name);
-//   console.log(currentPlayer.turn);
-
-
-
-
 
   turnMessage(nextPlayer.id - 1);
 
@@ -274,23 +242,27 @@ function winner() {
         quaterPlayers.push(allPLayers[index]);
 
         showResult(player1.name);
-      return;
-    } else if (player1.score < player2.score) {
+        return;
+
+    } 
+    else if (player1.score < player2.score) {
         
         const pName = player2.name;
         const index = allPLayers.findIndex((p) => p.name === pName)
         quaterPlayers.push(allPLayers[index]);
 
         showResult(player2.name);
-      return;
-    } else {
+        return;
+
+    }
+     else {
+
       alert("MATCH DRAW...");
-      alert("Both player have playe again,Score is zero,just roll the dice and play")
+      alert("Both player have playe again,Score is set to zero,just roll the dice and play")
       player1.score = 0;
       player1.turn = true;
       player2.score = 0;
       player2.turn = false;
-        // document.getElementById("rollDice").disabled = true;
       return;
     }
   }
@@ -298,20 +270,15 @@ function winner() {
   const prePlayer = playMatch.find((p) => p.turn === false);
 
   const currentPlayer = playMatch.find((p) => p.turn === true);
-//   console.log(prePlayer.name);
-//   console.log(prePlayer.turn);
-//   console.log(currentPlayer.name);
-//   console.log(currentPlayer.turn);
-
-
 
   if ((prePlayer.turn === false) && (prePlayer.score !== 0)) {
+
     if (currentPlayer.score > prePlayer.score) {
 
         const pName = currentPlayer.name;
         const index = allPLayers.findIndex((p) => p.name === pName)
         quaterPlayers.push(allPLayers[index]);
-      showResult(currentPlayer.name);
+        showResult(currentPlayer.name);
 
       return;
     }
@@ -322,29 +289,22 @@ function winner() {
 function showResult(id) {
 
     if (matchNumber > 6) {
-        console.log('mathc number :',matchNumber);
         
         document.getElementById(`navBar1`).innerHTML = `${id} WON THE FINAL MATCH 😎😎😍😍`;
         document.getElementById("rollDice").disabled = true;
         document.getElementById('nextMatch').disabled = true;
-
         
     }
     else{
         document.getElementById(`p-won`).innerHTML = `${id} WON...😎`;
 
         document.getElementById("rollDice").disabled = true;
-      
-        console.log(quaterPlayers);
     }
   
-
 }
 
 function reset(){
 
-    // playMatch[0].id = 0;
-    // playMatch[1].id = 0;
     count = 0;
     document.getElementById("turnMessage").innerHTML = "";
     document.getElementById(`score-area1`).innerHTML = "";
@@ -354,11 +314,8 @@ function reset(){
     document.getElementById(`dice-img2`).src = `images/1.svg`;
 
     if (matchNumber === 6) {
-        console.log('6 matchs are completed');
         
-        console.log('remoe kro 4 elements');
         quaterPlayers.splice(0,4);
-        console.log(quaterPlayers);
         
     }
 
@@ -371,20 +328,19 @@ function reset(){
 
   if(matchNumber >= 4){
     
-    console.log('Quater Final ka shocho ');
     first = 0;
     second = 2;
     if (matchNumber === 5) {
-        console.log('quater final 2');
         
-    updateIds(first+2,second+2);
-
+        updateIds(first+2,second+2);
         return;
-    }
+
+        }
+
     updateIds(first,second);
 
-
   }
+
 }
 
 
