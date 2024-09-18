@@ -65,7 +65,7 @@ let quaterPlayers = [];
 let first = 1;
 let second = 5;
 
-let playMatch;
+let playMatch = [];
 
 document.getElementById("startButton").addEventListener("click", startGame);
 
@@ -115,6 +115,7 @@ function updateIds(newId1, newId2) {
     if ((id1 === 0 && id2 === 2) || (id1 === 2 && id2 === 4)) {
         
         playMatch = [];
+
         for (let i = id1; i < id2; i++) {
         
             playMatch.push({...quaterPlayers[i]})
@@ -125,12 +126,23 @@ function updateIds(newId1, newId2) {
     }
     else{
         
+        playMatch = [];
         
-    playMatch = allPLayers.filter((pair) => {
+        for (let i = 0; i < allPLayers.length; i++) {
+            
+            if (allPLayers[i].id === id1) {
+                playMatch.push({...allPLayers[i]})
+            }
+            if (allPLayers[i].id === id2) {
+                playMatch.push({...allPLayers[i]})
+            }
+                
+        }
+    // playMatch = allPLayers.filter((pair) => {
 
-        return pair.id === id1 || pair.id === id2;
+    //     return pair.id === id1 || pair.id === id2;
   
-      }).map(p => ({...p}));
+    //   }).map(p => ({...p}));
     }
     console.log(playMatch);
 
@@ -238,6 +250,8 @@ function winner() {
     if (player1.score > player2.score) {
 
         const pName = player1.name;
+        console.log('won: ',pName);
+        
         const index = allPLayers.findIndex((p) => p.name === pName)
         quaterPlayers.push(allPLayers[index]);
 
@@ -248,6 +262,8 @@ function winner() {
     else if (player1.score < player2.score) {
         
         const pName = player2.name;
+        console.log('won: ',pName);
+        
         const index = allPLayers.findIndex((p) => p.name === pName)
         quaterPlayers.push(allPLayers[index]);
 
@@ -276,6 +292,8 @@ function winner() {
     if (currentPlayer.score > prePlayer.score) {
 
         const pName = currentPlayer.name;
+        console.log('won: ',pName);
+        
         const index = allPLayers.findIndex((p) => p.name === pName)
         quaterPlayers.push(allPLayers[index]);
         showResult(currentPlayer.name);
